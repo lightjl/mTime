@@ -14,13 +14,21 @@ def checkToday():  #
     for each in content_field:
 
         syrq = each.xpath('div[@class="txtbox"]/p[@class="showday"]//text()')[0]
-        dq = each.xpath('//p[contains(text(),"国家地区：")]/a/text()')[0]
-        #dq = each.xpath('div[@class="txtbox"]/p[3]/a/text()')[0]
+        #dq = each.xpath('//p[contains(text(),"国家地区：")]/a/text()')[0]
+        dq = each.xpath('div[@class="txtbox"]/p[3]/a/text()')[0]
         #print(each.xpath('div[@class="txtbox"]/h3//text()')[0])
         #print(dq)
+        sydq = syrq.split(' ')[1].split('(')[1].split(')')[0]
         syrq = syrq.split(' ')[1].split('(')[0]
+        if (sydq) != '中国':
+            continue
         if syrq[-1] == '年' or syrq[-1] == '月':
             continue
+        '''
+        print(syrq)
+        print(dq)
+        print(each.xpath('div[@class="txtbox"]/h3//text()')[0])
+        '''
         t = (time.strptime(syrq, '%Y年%m月%d日'))
         day_time = datetime.date.today()
         oneday = datetime.timedelta(days=1)
